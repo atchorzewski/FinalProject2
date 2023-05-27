@@ -1,7 +1,6 @@
 package pl.gameshop.controllers;
 
-import com.bryghts.ftypes.async.Long;
-import com.bryghts.ftypes.async.String;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.DecimalFormat;
 import java.util.Optional;
-
 
 
 @Controller
@@ -63,7 +61,8 @@ public class AvailabilityTypeController {
         return String.format("redirect:availability%s", queryString);//robimy przekierowanie, ale zachowując parametry pageingu
     }
 
-    private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
+
+    private java.lang.String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
         if (queryString.contains("&")) {
             return "?"+queryString.substring(queryString.indexOf("&") + 1);//obcinamy parametr did, bo inaczej po przekierowaniu znowu będzie wywołana metoda delete
         }else{
