@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@NoArgsConstructor
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,10 @@ public class Role {
     public enum Types{
         ROLE_ADMIN,
         ROLE_USER
+    }
+
+    public Role() {
+        // Konstruktor domyślny
     }
 
     public Integer getId() {
@@ -43,10 +47,10 @@ public class Role {
     }
 
     public void setType(Types type) {
-        type = type;
+        this.type = type;
     }
 
     public void setUsers(Set<User> users) {
-        users = users;
+        this.users = users;
     }
 }
