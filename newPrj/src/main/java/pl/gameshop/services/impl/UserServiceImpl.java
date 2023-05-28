@@ -1,6 +1,5 @@
 package pl.gameshop.services.impl;
 
-import com.bryghts.ftypes.async.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.gameshop.models.Role;
 import pl.gameshop.repositories.RoleRepository;
 import pl.gameshop.repositories.UserRepository;
+import pl.gameshop.models.Role;
 import pl.gameshop.services.UserService;
 
 import java.util.Arrays;
@@ -38,9 +37,9 @@ public class UserServiceImpl implements UserService {
     //ponadto, musi być włączone zarządzanie transakcjami @EnableTransactionManagement
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        pl.gameshop.models.User user = userRepository.findByUsername(username.toString());
+        pl.gameshop.models.User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username.toString());
+            throw new UsernameNotFoundException(username);
         }
 
         return createUserDetails(user);
@@ -68,15 +67,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUniqueLogin(String username) {
-        return userRepository.findByUsername(username.toString()) == null;
+        return userRepository.findByUsername(username) == null;
     }
     @Override
     public boolean isUniqueEmail(String email) {
-        return userRepository.findByEmail(email.toString()) == null;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(java.lang.String s) throws UsernameNotFoundException {
-        return null;
+        return userRepository.findByEmail(email) == null;
     }
 }

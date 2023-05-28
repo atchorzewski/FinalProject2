@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
-@Getter @Setter
+
 @Table(name="order_items")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +23,28 @@ public class OrderItem {
     private String name;
     @Min(0)
     private BigDecimal price;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

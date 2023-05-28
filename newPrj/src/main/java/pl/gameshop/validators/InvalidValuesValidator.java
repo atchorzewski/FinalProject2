@@ -1,11 +1,9 @@
 package pl.gameshop.validators;
-import com.bryghts.ftypes.async.String;
 import pl.gameshop.validators.annotations.InvalidValues;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
-
 
 public class InvalidValuesValidator implements ConstraintValidator<InvalidValues, String> {
 

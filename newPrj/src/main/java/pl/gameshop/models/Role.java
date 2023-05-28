@@ -7,14 +7,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
 @NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Enumerated(EnumType.STRING)//przechowywane w postaci string
+    @Enumerated(EnumType.ORDINAL)//przechowywane w postaci string
     private Types type;
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
@@ -24,7 +22,31 @@ public class Role {
         ROLE_USER
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public Types getType() {
+        return type;
+    }
+
+    public Set<User> getUser() {
+        return users;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Role(Types type){
         this.type = type;
+    }
+
+    public void setType(Types type) {
+        type = type;
+    }
+
+    public void setUsers(Set<User> users) {
+        users = users;
     }
 }

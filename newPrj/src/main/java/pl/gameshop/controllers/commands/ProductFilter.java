@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
-@Getter @Setter
+
 public class ProductFilter {
 
     private String phrase;
@@ -20,6 +20,45 @@ public class ProductFilter {
     @PositiveOrZero
     private BigDecimal maxPrice;
 
+    public String getPhrase() {
+        return phrase;
+    }
+
+    public Long getPlatform() {
+        return platform;
+    }
+
+    public Long getCategory() {
+        return category;
+    }
+
+    public BigDecimal getMinPrice() {
+        return minPrice;
+    }
+
+    public BigDecimal getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setPhrase(String phrase) {
+        this.phrase = phrase;
+    }
+
+    public void setPlatform(Long platform) {
+        this.platform = platform;
+    }
+
+    public void setCategory(Long category) {
+        this.category = category;
+    }
+
+    public void setMinPrice(BigDecimal minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public void setMaxPrice(BigDecimal maxPrice) {
+        this.maxPrice = maxPrice;
+    }
 
     public boolean isEmpty(){
         return StringUtils.isEmpty(phrase) && platform == null && category == null && minPrice == null && minPrice == null;

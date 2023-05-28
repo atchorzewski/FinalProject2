@@ -1,6 +1,5 @@
 package pl.gameshop.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.data.domain.Pageable;
@@ -10,14 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import pl.gameshop.services.AvailabilityService;
 import pl.gameshop.models.AvailabilityType;
+import pl.gameshop.services.AvailabilityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.DecimalFormat;
 import java.util.Optional;
-
 
 @Controller
 @SessionAttributes("searchCommand")
@@ -27,7 +25,7 @@ public class AvailabilityTypeController {
     private AvailabilityService availabilityService;
 
     @RequestMapping(value="/availabilityForm", method= RequestMethod.GET)
-    public java.lang.String showForm(Model model, Optional<Long> id){
+    public String showForm(Model model, Optional<Long> id){
         model.addAttribute("availability",
                 id.isPresent()?
                         availabilityService.getType(id.get()):
@@ -36,7 +34,7 @@ public class AvailabilityTypeController {
     }
 
     @RequestMapping(value="/availabilityForm", method= RequestMethod.POST)
-    public java.lang.String processForm(@Valid @ModelAttribute("availability") AvailabilityType type, BindingResult errors) {
+    public String processForm(@Valid @ModelAttribute("availability") AvailabilityType type, BindingResult errors) {
 
         if(errors.hasErrors()){
             return "availabilityForm";
@@ -48,7 +46,7 @@ public class AvailabilityTypeController {
     }
 
     @RequestMapping(value="/availability", method = {RequestMethod.GET})
-    public java.lang.String showTypes(Model model, Pageable pageable){
+    public String showTypes(Model model, Pageable pageable){
         model.addAttribute("availabilityListPage", availabilityService.getAllTypes(pageable));
         return "availabilityList";
     }
@@ -61,8 +59,7 @@ public class AvailabilityTypeController {
         return String.format("redirect:availability%s", queryString);//robimy przekierowanie, ale zachowując parametry pageingu
     }
 
-
-    private java.lang.String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
+    private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
         if (queryString.contains("&")) {
             return "?"+queryString.substring(queryString.indexOf("&") + 1);//obcinamy parametr did, bo inaczej po przekierowaniu znowu będzie wywołana metoda delete
         }else{

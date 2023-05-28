@@ -1,6 +1,5 @@
 package pl.gameshop.services.impl;
 
-import com.bryghts.ftypes.async.Long;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,32 +24,17 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         return page;
     }
 
+    @Transactional
     @Override
     public AvailabilityType getType(Long id) {
-        return null;
+        Optional<AvailabilityType> optionalType = availabilityTypeRepository.findById(id);
+        AvailabilityType type = optionalType.orElseThrow(()->new ItemNotFoundException(id));
+        return type;
     }
-
-    @Transactional
-//    @Override
-//    public AvailabilityType getType(Long id) {
-//        Optional<AvailabilityType> optionalType = availabilityTypeRepository.findById(id);
-//        AvailabilityType type = optionalType.orElseThrow(()->new ItemNotFoundException(id));
-//        return type;
-//    }
 
     @Override
     public void deleteType(Long id) {
         availabilityTypeRepository.deleteById(id);
-    }
-
-    @Override
-    public AvailabilityType getType(java.lang.Long id) {
-        return null;
-    }
-
-    @Override
-    public void deleteType(java.lang.Long id) {
-
     }
 
     @Override

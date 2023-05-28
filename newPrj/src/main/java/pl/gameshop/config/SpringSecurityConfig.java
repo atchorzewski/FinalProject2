@@ -1,7 +1,9 @@
 package pl.gameshop.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,12 +20,13 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    protected void configure(HttpSecurity http) throws java.lang.Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
         String[] permittedForAll = {"/static/**", "/webjars/**","/", "/products", "/product", "/error", "/register",
                                     "/uploads/**", "/images/**", "/css/**", "/about"};
 
-        java.lang.String[] forAdmin = {"/productForm", "/platformForm","/categoryForm","/languageForm","/availabilityForm", "/orders"};
+        String[] forAdmin = {"/productForm", "/platformForm","/categoryForm","/languageForm","/availabilityForm", "/orders"};
 
         http
                 .authorizeRequests()

@@ -11,13 +11,14 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name="products")
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
@@ -34,7 +35,7 @@ public class Product {
     @Min(0)
     @Max(1000000)
     private BigDecimal price;
-    @JoinColumn(name="availabilitytype_id", nullable = false)
+    @JoinColumn(name="availabilityType_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AvailabilityType availability;
@@ -57,6 +58,50 @@ public class Product {
     private List<Language> languages;
     private String imageName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public AvailabilityType getAvailability() {
+        return availability;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public List<Language> getLanguages() {
+        return languages;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,8 +120,11 @@ public class Product {
                 Objects.equals(getImageName(), product.getImageName());
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getReleaseDate(), getPrice(), getAvailability(), getDescription(), getRequirements(), getCategory(), getPlatform(), getLanguages(), getImageName());
     }
+
 }

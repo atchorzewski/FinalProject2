@@ -17,7 +17,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
     }
 
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return userService == null || (email != null); //&& userService.isUniqueEmail(email));
+        return userService == null || (email != null && userService.isUniqueEmail(email));
     }
 
 }

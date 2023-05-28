@@ -1,5 +1,6 @@
 package pl.gameshop.controllers;
 
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
@@ -14,12 +15,13 @@ import pl.gameshop.services.ProductService;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
-import java.io.*;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 
 @Controller
 @SessionAttributes(names={"product"})
@@ -48,16 +50,16 @@ public class ProductController {
             String uploadsDir = "/uploads/";
             String realPathtoUploads = servletContext.getRealPath(uploadsDir);
 
-            if (!new File(realPathtoUploads).exists()) {
-                new File(realPathtoUploads).mkdir();
-            }
+//            if (!new File(realPathtoUploads).exists()) {
+//                new File(realPathtoUploads).mkdir();
+//            }
 
             String orgName = file.getOriginalFilename();
             String filePath = realPathtoUploads + orgName;
-            File dest = new File(filePath);
-            file.transferTo(dest);
+//            File dest = new File(filePath);
+//            file.transferTo(dest);
 
-            p.setImageName(uploadsDir + file.getOriginalFilename());
+//            p.setImageName(uploadsDir + file.getOriginalFilename());
         }
         if(errors.hasErrors()){
             return "productForm";
@@ -68,7 +70,7 @@ public class ProductController {
         return "redirect:products";//po udanym dodaniu/edycji przekierowujemy na listę
     }
 
-    @ModelAttribute("availabilityTypes")
+    @ModelAttribute("availabilityType")
     public List<AvailabilityType> loadTypes(){
         List<AvailabilityType> types = productService.getAllAvailabilityTypes();
         return types;
